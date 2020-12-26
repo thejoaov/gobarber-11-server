@@ -7,6 +7,7 @@
     "build": "tsc",
     "dev:server": "ts-node-dev --inspect --transpileOnly --ignore node_modules src/server.ts",
     "start": "ts-node src/index.ts",
+    "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
@@ -41,7 +42,7 @@
     "git-commit-msg-linter": "^3.0.0",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
-    "prettier": "^2.0.5",
+    "prettier": "^2.2.1",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   }
