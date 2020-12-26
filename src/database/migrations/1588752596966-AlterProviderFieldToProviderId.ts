@@ -3,14 +3,14 @@ import {
   QueryRunner,
   TableColumn,
   TableForeignKey,
-} from 'typeorm';
+} from 'typeorm'
 
-const isPostgres = process.env.DB_TYPE === 'postgres';
+const isPostgres = process.env.DB_TYPE === 'postgres'
 
 export default class AlterProviderFieldToProviderId1588752596966
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropColumn('appointments', 'provider');
+    await queryRunner.dropColumn('appointments', 'provider')
 
     await queryRunner.addColumn(
       'appointments',
@@ -19,7 +19,7 @@ export default class AlterProviderFieldToProviderId1588752596966
         type: isPostgres ? 'uuid' : 'varchar',
         isNullable: true,
       }),
-    );
+    )
 
     await queryRunner.createForeignKey(
       'appointments',
@@ -31,15 +31,15 @@ export default class AlterProviderFieldToProviderId1588752596966
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
-    );
+    )
 
     // CASCADE
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('appointments', 'appointmentProvider');
+    await queryRunner.dropForeignKey('appointments', 'appointmentProvider')
 
-    await queryRunner.dropColumn('appointments', 'provider_id');
+    await queryRunner.dropColumn('appointments', 'provider_id')
 
     await queryRunner.addColumn(
       'appointments',
@@ -47,6 +47,6 @@ export default class AlterProviderFieldToProviderId1588752596966
         name: 'provider',
         type: 'varchar',
       }),
-    );
+    )
   }
 }

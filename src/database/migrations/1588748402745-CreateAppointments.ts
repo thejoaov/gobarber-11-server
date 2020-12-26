@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-const isPostgres = process.env.DB_TYPE === 'postgres';
+const isPostgres = process.env.DB_TYPE === 'postgres'
 
 export default class CreateAppointments1588748402745
   implements MigrationInterface {
@@ -36,10 +36,10 @@ export default class CreateAppointments1588748402745
           },
         ],
       }),
-    );
+    )
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('appointments');
+    await queryRunner.dropTable('appointments')
   }
 }

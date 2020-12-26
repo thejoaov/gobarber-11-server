@@ -1,6 +1,6 @@
-import { createConnection } from 'typeorm';
-import dotenv from 'dotenv-safe';
+import { createConnection } from 'typeorm'
+import dotenv from 'dotenv-safe'
 
-dotenv.config();
+dotenv.config()
 
-createConnection();
+createConnection()

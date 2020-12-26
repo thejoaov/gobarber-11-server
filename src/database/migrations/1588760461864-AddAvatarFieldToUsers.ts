@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
+import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm'
 
 export default class AddAvatarFieldToUsers1588760461864
   implements MigrationInterface {
@@ -10,10 +10,10 @@ export default class AddAvatarFieldToUsers1588760461864
         type: 'varchar',
         isNullable: true,
       }),
-    );
+    )
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropColumn('users', 'avatar');
+    await queryRunner.dropColumn('users', 'avatar')
   }
 }

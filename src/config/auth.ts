@@ -1,4 +1,4 @@
-import { createHash } from 'crypto';
+import { createHash } from 'crypto'
 
 export default {
   jwt: {
@@ -7,4 +7,4 @@ export default {
       .digest('hex'),
     expiresIn: '1d',
   },
-};
+}
