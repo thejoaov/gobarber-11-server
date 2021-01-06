@@ -10,7 +10,7 @@ import AppError from 'shared/errors/AppError'
 
 import 'shared/infra/typeorm'
 
-const { APP_PORT } = process.env || 3333
+const { PORT } = process.env || 3333
 
 const app = express()
 
@@ -36,6 +36,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   })
 })
 
-app.listen(APP_PORT, () => {
-  console.log(`🚀 Server started on port ${APP_PORT}!`)
+app.listen(PORT, () => {
+  console.log(`🚀 Server started on port ${PORT}!`)
 })
