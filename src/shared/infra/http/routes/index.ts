@@ -6,6 +6,9 @@ import sessionsRouter from 'modules/users/infra/http/routes/sessions.routes'
 
 const routes = Router()
 
+routes.use('/', (req, res) => {
+  res.json({ hello: 'Hello!' })
+})
 routes.use('/appointments', appointmentsRouter)
 routes.use('/users', usersRouter)
 routes.use('/sessions', sessionsRouter)
