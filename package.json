@@ -6,10 +6,10 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint 'src/**' --fix",
-    "dev:server": "ts-node-dev --inspect --transpileOnly --ignore node_modules src/server.ts",
-    "start": "ts-node src/index.ts",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "start": "ts-node src/shared/infra/http/server.ts",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -45,6 +45,7 @@
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3"
   }
 }
