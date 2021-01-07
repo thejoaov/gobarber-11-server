@@ -26,6 +26,7 @@
         "argsIgnorePattern": "_"
       }
     ],
+    "no-useless-constructor":"off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/naming-convention": [
       "error",
