@@ -17,6 +17,6 @@ So, the code avaiable here may differ from the original, which can be found [HER
 - [x] Dockerize Databases (docker-compose)
 - [ ] Tests implementation
 - [ ] CI (CircleCI or GH Actions)
-- [ ] CD (Heroku)
+- [x] CD (Heroku)
 
 [gobarber-rocketseat]: https://github.com/thejoaov/bootcamp-gostack-modulos/tree/master/nivel-02/02-iniciando-back-end-do-app
