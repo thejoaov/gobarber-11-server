@@ -13,7 +13,7 @@
     "start": "ts-node -r tsconfig-paths/register --transpile-only src/shared/infra/http/server.ts",
     "oldstart": "ts-node src/shared/infra/http/server.ts",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
