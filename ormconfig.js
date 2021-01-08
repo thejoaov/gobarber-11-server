@@ -1,6 +1,7 @@
 const { DB_TYPE, DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env
 
 module.exports = {
+  name: 'default',
   type: DB_TYPE || 'postgres',
   host: DB_HOST || 'localhost',
   port: DB_PORT || 5432,
