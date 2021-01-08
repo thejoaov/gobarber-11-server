@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm'
 
-import User from 'modules/users/infra/typeorm/entities/User'
+import User from '@modules/users/infra/typeorm/entities/User'
 
 const isPostgres = process.env.DB_TYPE === 'postgres'
 
