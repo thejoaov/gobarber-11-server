@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError'
 import 'reflect-metadata'
-import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentRepository'
-import CreateAppointmentService from './CreateAppointmentService'
+import FakeAppointmentsRepository from '../../repositories/fakes/FakeAppointmentRepository'
+import CreateAppointmentService from '.'
 
 describe('CreateAppointmentService', () => {
   it('should be able to create a new appointment', async () => {
