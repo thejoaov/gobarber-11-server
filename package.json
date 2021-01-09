@@ -14,7 +14,8 @@
     "oldstart": "ts-node src/shared/infra/http/server.ts",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "jest"
+    "test": "jest",
+    "test:changed": "jest -o --passWithNoTests"
   },
   "dependencies": {
     "@types/node": "^14.14.20",
