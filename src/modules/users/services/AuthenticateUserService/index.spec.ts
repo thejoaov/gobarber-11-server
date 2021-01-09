@@ -33,7 +33,7 @@ describe('AuthenticateUserService', () => {
     expect(authenticatedUser).toHaveProperty('token')
   })
 
-  it('should not be able to authenticate with different email', async () => {
+  it('should not be able to authenticate with wrong email', async () => {
     const user = {
       email: 'teste@teste.com',
       name: 'teste',
@@ -61,7 +61,7 @@ describe('AuthenticateUserService', () => {
     ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to authenticate with different password', async () => {
+  it('should not be able to authenticate with wrong password', async () => {
     const user = {
       email: 'teste@teste.com',
       name: 'teste',
