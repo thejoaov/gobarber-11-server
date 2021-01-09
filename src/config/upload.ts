@@ -5,6 +5,7 @@ import multer from 'multer'
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp')
 
 export default {
+  directory: tmpFolder,
   tmpFolder,
   uplodsFolder: path.resolve(tmpFolder, 'uploads'),
 
