@@ -15,7 +15,8 @@
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest",
-    "test:changed": "jest -o --passWithNoTests"
+    "test:changed": "jest -o --passWithNoTests",
+    "test:ci": "TZ=America/Fortaleza jest --ci --runInBand --collectCoverage"
   },
   "dependencies": {
     "@types/node": "^14.14.20",
