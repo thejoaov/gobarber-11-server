@@ -14,6 +14,8 @@ This repository contains the GoBarber BackEnd application, developed during Rock
 
 So, the code avaiable here may differ from the original, which can be found [HERE][gobarber-rocketseat].
 
+
+## [Requisites][requisites-url]
 ## To - Do
 
 - [x] Commit pattern (git-commit-msg-linter)
@@ -22,6 +24,7 @@ So, the code avaiable here may differ from the original, which can be found [HER
 - [x] Tests implementation (TDD)
 - [x] CI (CircleCI)
 - [x] CD (Heroku)
+- [x] Code Coverage (CodeCov)
 
 [gobarber-rocketseat]: https://github.com/thejoaov/bootcamp-gostack-modulos/tree/master/nivel-02/02-iniciando-back-end-do-app
 [circleci-img]: https://circleci.com/gh/thejoaov/gobarber-11-server/tree/main.svg?style=svg
@@ -30,3 +33,4 @@ So, the code avaiable here may differ from the original, which can be found [HER
 [codecov-badge-url]: https://codecov.io/gh/thejoaov/gobarber-11-server
 [heroku-badge]: https://heroku-badge.herokuapp.com/?app=gobarber-11-server&root=appointments&svg=1&style=flat
 [heroku-badge-url]: https://heroku-badge.herokuapp.com/?app=gobarber-11-server&root=appointments
+[requisites-url]: ./requisites.md
