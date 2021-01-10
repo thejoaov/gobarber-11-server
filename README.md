@@ -31,6 +31,6 @@ So, the code avaiable here may differ from the original, which can be found [HER
 [circleci-url]: https://circleci.com/gh/thejoaov/gobarber-11-server/tree/main
 [codecov-badge]: https://codecov.io/gh/thejoaov/gobarber-11-server/branch/main/graph/badge.svg
 [codecov-badge-url]: https://codecov.io/gh/thejoaov/gobarber-11-server
-[heroku-badge]: https://heroku-badge.herokuapp.com/?app=gobarber-11-server&root=appointments&svg=1&style=flat
+[heroku-badge]: https://heroku-badge.herokuapp.com/?app=gobarber-11-server&root=appointments&svg=1
 [heroku-badge-url]: https://heroku-badge.herokuapp.com/?app=gobarber-11-server&root=appointments
 [requisites-url]: ./requisites.md
