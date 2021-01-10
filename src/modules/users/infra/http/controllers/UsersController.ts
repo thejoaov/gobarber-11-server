@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
-import CreateUserService from '@modules/users/services/CreateUserService'
 import { container } from 'tsyringe'
 
-export default class UsersController {
+import CreateUserService from '@modules/users/services/CreateUserService'
+
+export default class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body
 
@@ -14,8 +15,8 @@ export default class UsersController {
       password,
     })
 
-    const { password: omittedPassword, ...userResponse } = user
+    const { password: omittedPassword, ...userWithoutPassword } = user
 
-    return response.json(userResponse)
+    return response.json(userWithoutPassword)
   }
 }

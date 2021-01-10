@@ -1,73 +1,78 @@
 import AppError from '@shared/errors/AppError'
-import 'reflect-metadata'
 
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider'
 import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository'
-import UpdateAvatarUserService from '.'
+import UpdateUserAvatarService from '.'
 
-describe('UpdateAvatarUserService', () => {
-  it('should be able to update user avatar', async () => {
-    const fakeUserRepository = new FakeUsersRepository()
+describe('UpdateUserAvatar', () => {
+  it('should be able to create a new user', async () => {
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeStorageProvider = new FakeStorageProvider()
-    const updateAvatarUserService = new UpdateAvatarUserService(
-      fakeUserRepository,
+
+    const updateUserAvatar = new UpdateUserAvatarService(
+      fakeUsersRepository,
       fakeStorageProvider,
     )
 
-    const user = await fakeUserRepository.create({
-      name: 'DETONATOR',
-      email: 'detonator@massacration.com',
-      password: 'massacration123',
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
     })
 
-    const updatedUser = await updateAvatarUserService.execute({
-      avatarFilename: 'detonator.jpg',
+    await updateUserAvatar.execute({
       user_id: user.id,
+      avatarFilename: 'avatar.jpg',
     })
 
-    expect(updatedUser.avatar).toBe('detonator.jpg')
+    expect(user.avatar).toBe('avatar.jpg')
   })
 
-  it('should be able to update user avatar and delete the old', async () => {
-    const fakeUserRepository = new FakeUsersRepository()
+  it('should not be able update avatar from non existing user', async () => {
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeStorageProvider = new FakeStorageProvider()
-    const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile')
-    const updateAvatarUserService = new UpdateAvatarUserService(
-      fakeUserRepository,
-      fakeStorageProvider,
-    )
 
-    const user = await fakeUserRepository.create({
-      name: 'DETONATOR',
-      email: 'detonator@massacration.com',
-      password: 'massacration123',
-    })
-    await updateAvatarUserService.execute({
-      avatarFilename: 'detonator.jpg',
-      user_id: user.id,
-    })
-    const updatedUser = await updateAvatarUserService.execute({
-      avatarFilename: 'detonator_massacration.jpg',
-      user_id: user.id,
-    })
-
-    expect(deleteFile).toBeCalledWith('detonator.jpg')
-    expect(updatedUser.avatar).toBe('detonator_massacration.jpg')
-  })
-
-  it('should not be able to update user avatar with non existing user_id', async () => {
-    const fakeUserRepository = new FakeUsersRepository()
-    const fakeStorageProvider = new FakeStorageProvider()
-    const updateAvatarUserService = new UpdateAvatarUserService(
-      fakeUserRepository,
+    const updateUserAvatar = new UpdateUserAvatarService(
+      fakeUsersRepository,
       fakeStorageProvider,
     )
 
     expect(
-      updateAvatarUserService.execute({
-        avatarFilename: 'detonator.jpg',
+      updateUserAvatar.execute({
         user_id: 'non-existing-user',
+        avatarFilename: 'avatar.jpg',
       }),
     ).rejects.toBeInstanceOf(AppError)
+  })
+
+  it('should delete old avatar when updating new one', async () => {
+    const fakeUsersRepository = new FakeUsersRepository()
+    const fakeStorageProvider = new FakeStorageProvider()
+
+    const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile')
+
+    const updateUserAvatar = new UpdateUserAvatarService(
+      fakeUsersRepository,
+      fakeStorageProvider,
+    )
+
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    await updateUserAvatar.execute({
+      user_id: user.id,
+      avatarFilename: 'avatar.jpg',
+    })
+
+    await updateUserAvatar.execute({
+      user_id: user.id,
+      avatarFilename: 'avatar2.jpg',
+    })
+
+    expect(deleteFile).toHaveBeenCalledWith('avatar.jpg')
+    expect(user.avatar).toBe('avatar2.jpg')
   })
 })

@@ -12,8 +12,8 @@ export default class UserAvatarController {
       avatarFilename: request.file.filename,
     })
 
-    const { password: omittedPassword, ...userResponse } = user
+    const { password: omittedPassword, ...userWithoutPassword } = user
 
-    return response.json(userResponse)
+    return response.json(userWithoutPassword)
   }
 }

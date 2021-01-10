@@ -1,90 +1,81 @@
-import 'reflect-metadata'
 import AppError from '@shared/errors/AppError'
-import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider'
+
 import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository'
+import FakeHashProvider from '../../providers/HashProvider/fakes/FakeHashProvider'
 import AuthenticateUserService from '.'
 import CreateUserService from '../CreateUserService'
 
-describe('AuthenticateUserService', () => {
+describe('AuthenticateUser', () => {
   it('should be able to authenticate', async () => {
-    const user = {
-      email: 'teste@teste.com',
-      name: 'teste',
-      password: 'teste',
-    }
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeHashProvider = new FakeHashProvider()
-    const fakeUserRepository = new FakeUsersRepository()
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    )
+
     const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
+      fakeUsersRepository,
       fakeHashProvider,
     )
 
-    const createdUser = await createUser.execute(user)
-    const authenticatedUser = await authenticateUser.execute({
-      email: user.email,
-      password: user.password,
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    )
+
+    const user = await createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123123',
     })
 
-    expect(createdUser).toEqual(authenticatedUser.user)
-    expect(authenticatedUser).toHaveProperty('token')
+    const response = await authenticateUser.execute({
+      email: 'johndoe@example.com',
+      password: '123123',
+    })
+
+    expect(response).toHaveProperty('token')
+    expect(response.user).toEqual(user)
   })
 
-  it('should not be able to authenticate with wrong email', async () => {
-    const user = {
-      email: 'teste@teste.com',
-      name: 'teste',
-      password: 'teste',
-    }
+  it('should not be able to authenticate with a non existing user', async () => {
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeHashProvider = new FakeHashProvider()
-    const fakeUserRepository = new FakeUsersRepository()
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    )
+
     const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
+      fakeUsersRepository,
       fakeHashProvider,
     )
 
-    const createdUser = await createUser.execute(user)
-
-    expect(createdUser).toBeTruthy()
     expect(
       authenticateUser.execute({
-        email: 'different@email.com',
-        password: user.password,
+        email: 'johndoe@example.com',
+        password: '123123',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })
 
   it('should not be able to authenticate with wrong password', async () => {
-    const user = {
-      email: 'teste@teste.com',
-      name: 'teste',
-      password: 'teste',
-    }
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeHashProvider = new FakeHashProvider()
-    const fakeUserRepository = new FakeUsersRepository()
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    )
+
     const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
+      fakeUsersRepository,
       fakeHashProvider,
     )
 
-    const createdUser = await createUser.execute(user)
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    )
 
-    expect(createdUser).toBeTruthy()
+    await createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123123',
+    })
+
     expect(
       authenticateUser.execute({
-        email: user.email,
-        password: 'differentPassword',
+        email: 'johndoe@example.com',
+        password: 'wrong-password',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })
