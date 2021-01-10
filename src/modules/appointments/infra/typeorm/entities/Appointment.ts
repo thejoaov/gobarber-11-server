@@ -10,10 +10,8 @@ import {
 
 import User from '@modules/users/infra/typeorm/entities/User'
 
-const isPostgres = process.env.DB_TYPE === 'postgres'
-
 @Entity('appointments')
-export default class Appointment {
+class Appointment {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -24,7 +22,7 @@ export default class Appointment {
   @JoinColumn({ name: 'provider_id' })
   provider: User
 
-  @Column(isPostgres ? 'timestamp with time zone' : 'timestamp')
+  @Column('timestamp with time zone')
   date: Date
 
   @CreateDateColumn()
@@ -33,3 +31,5 @@ export default class Appointment {
   @UpdateDateColumn()
   updated_at: Date
 }
+
+export default Appointment

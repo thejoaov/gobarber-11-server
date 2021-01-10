@@ -1,49 +1,47 @@
 import AppError from '@shared/errors/AppError'
-import 'reflect-metadata'
-import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider'
+
 import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository'
+import FakeHashProvider from '../../providers/HashProvider/fakes/FakeHashProvider'
 import CreateUserService from '.'
 
-describe('CreateUserService', () => {
+describe('CreateUser', () => {
   it('should be able to create a new user', async () => {
-    const fakeUserRepository = new FakeUsersRepository()
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeHashProvider = new FakeHashProvider()
-    const createUserService = new CreateUserService(
-      fakeUserRepository,
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
       fakeHashProvider,
     )
 
-    const user = await createUserService.execute({
-      email: 'teste@teste.com',
-      name: 'teste',
-      password: 'teste',
+    const user = await createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123123',
     })
 
-    expect(user).toBeTruthy()
-    expect(user).toHaveProperty('email')
-    expect(user).toHaveProperty('name')
+    expect(user).toHaveProperty('id')
   })
 
-  it('should not be able to create a new user with the same email', async () => {
-    const fakeUserRepository = new FakeUsersRepository()
+  it('should not be able to create a new user with email from another', async () => {
+    const fakeUsersRepository = new FakeUsersRepository()
     const fakeHashProvider = new FakeHashProvider()
-    const createUserService = new CreateUserService(
-      fakeUserRepository,
+
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
       fakeHashProvider,
     )
 
-    const user = await createUserService.execute({
-      email: 'teste@teste.com',
-      name: 'teste',
-      password: 'teste',
+    await createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123123',
     })
 
-    expect(user).toBeTruthy()
     expect(
-      createUserService.execute({
-        email: 'teste@teste.com',
-        name: 'teste',
-        password: 'teste',
+      createUser.execute({
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '123123',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })

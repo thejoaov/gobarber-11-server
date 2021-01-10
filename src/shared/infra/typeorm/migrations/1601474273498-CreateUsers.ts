@@ -1,28 +1,30 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-const isPostgres = process.env.DB_TYPE === 'postgres'
-
-export default class CreateAppointments1588748402745
-  implements MigrationInterface {
+export default class CreateUsers1601474273498 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'appointments',
+        name: 'users',
         columns: [
           {
             name: 'id',
-            type: isPostgres ? 'uuid' : 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'provider',
+            name: 'name',
             type: 'varchar',
           },
           {
-            name: 'date',
-            type: isPostgres ? 'timestamp with time zone' : 'timestamp',
+            name: 'email',
+            type: 'varchar',
+            isUnique: true,
+          },
+          {
+            name: 'password',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -40,6 +42,6 @@ export default class CreateAppointments1588748402745
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('appointments')
+    await queryRunner.dropTable('users')
   }
 }

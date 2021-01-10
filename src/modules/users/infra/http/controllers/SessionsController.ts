@@ -14,8 +14,8 @@ export default class SessionsController {
       password,
     })
 
-    const { password: omittedPassword, ...responseUser } = user
+    const { password: omittedPassword, ...userWithoutPassword } = user
 
-    return response.json({ user: responseUser, token })
+    return response.json({ user: userWithoutPassword, token })
   }
 }
