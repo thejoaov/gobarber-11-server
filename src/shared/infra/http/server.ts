@@ -1,8 +1,8 @@
 import 'reflect-metadata'
-
 import express, { Request, Response, NextFunction } from 'express'
 import cors from 'cors'
 import 'express-async-errors'
+import dotenv from 'dotenv'
 
 import uploadConfig from '@config/upload'
 import AppError from '@shared/errors/AppError'
@@ -11,7 +11,10 @@ import routes from './routes'
 import '@shared/infra/typeorm'
 import '@shared/container'
 
+dotenv.config()
 const app = express()
+
+const { PORT } = process.env
 
 app.use(cors())
 app.use(express.json())
@@ -32,6 +35,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     .json({ status: 'error', message: 'Internal server error' })
 })
 
-app.listen(3333, () => {
-  console.log('🚀 Server started on port 3333')
+app.listen(PORT, () => {
+  console.log(`🚀 Server started on port ${PORT}`)
 })
