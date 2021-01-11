@@ -13,7 +13,7 @@
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "lint": "eslint 'src/**' --fix",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:changed": "jest -o --passWithNoTests",
     "test:ci": "TZ=America/Fortaleza jest --ci --runInBand --collectCoverage"
   },
