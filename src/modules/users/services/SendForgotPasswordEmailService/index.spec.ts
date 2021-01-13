@@ -38,11 +38,13 @@ describe('SendForgotPasswordEmail', () => {
   })
 
   it('should not be able to recover a non existing-user password', async () => {
-    await expect(
-      sendForgotPasswordEmail.execute({
-        email: 'johndoe@example.com',
-      }),
-    ).rejects.toBeInstanceOf(AppError)
+    const sendForgotPasswordEmailPromise = sendForgotPasswordEmail.execute({
+      email: 'johndoe@example.com',
+    })
+
+    await expect(sendForgotPasswordEmailPromise).rejects.toBeInstanceOf(
+      AppError,
+    )
   })
 
   it('should generate a forgot password token', async () => {

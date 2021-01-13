@@ -31,13 +31,12 @@ describe('CreateUser', () => {
       email: 'johndoe@example.com',
       password: '123123',
     })
+    const createUserPromise = createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123123',
+    })
 
-    await expect(
-      createUser.execute({
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: '123123',
-      }),
-    ).rejects.toBeInstanceOf(AppError)
+    await expect(createUserPromise).rejects.toBeInstanceOf(AppError)
   })
 })

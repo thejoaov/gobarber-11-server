@@ -38,12 +38,12 @@ describe('AuthenticateUser', () => {
   })
 
   it('should not be able to authenticate with a non existing user', async () => {
-    await expect(
-      authenticateUser.execute({
-        email: 'johndoe@example.com',
-        password: '123123',
-      }),
-    ).rejects.toBeInstanceOf(AppError)
+    const authenticateUserPromise = authenticateUser.execute({
+      email: 'johndoe@example.com',
+      password: '123123',
+    })
+
+    await expect(authenticateUserPromise).rejects.toBeInstanceOf(AppError)
   })
 
   it('should not be able to authenticate with wrong password', async () => {
@@ -53,11 +53,11 @@ describe('AuthenticateUser', () => {
       password: '123123',
     })
 
-    await expect(
-      authenticateUser.execute({
-        email: 'johndoe@example.com',
-        password: 'wrong-password',
-      }),
-    ).rejects.toBeInstanceOf(AppError)
+    const authenticateUserPromise = authenticateUser.execute({
+      email: 'johndoe@example.com',
+      password: 'wrong-password',
+    })
+
+    await expect(authenticateUserPromise).rejects.toBeInstanceOf(AppError)
   })
 })

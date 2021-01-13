@@ -34,12 +34,12 @@ describe('UpdateUserAvatar', () => {
   })
 
   it('should not be able update avatar from non existing user', async () => {
-    await expect(
-      updateUserAvatar.execute({
-        user_id: 'non-existing-user',
-        avatarFilename: 'avatar.jpg',
-      }),
-    ).rejects.toBeInstanceOf(AppError)
+    const updateUserAvatarPromise = updateUserAvatar.execute({
+      user_id: 'non-existing-user',
+      avatarFilename: 'avatar.jpg',
+    })
+
+    await expect(updateUserAvatarPromise).rejects.toBeInstanceOf(AppError)
   })
 
   it('should delete old avatar when updating new one', async () => {

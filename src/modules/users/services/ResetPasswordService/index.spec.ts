@@ -1,4 +1,4 @@
-// import AppError from '@shared/errors/AppError'
+import AppError from '@shared/errors/AppError'
 import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository'
 import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository'
 import ResetPasswordService from '.'
@@ -35,4 +35,25 @@ describe('ResetPassword', () => {
 
     expect(userUpdated?.password).toBe('123123')
   })
+
+  it('should throws an error if token does not exists', async () => {
+    await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    const resetPasswordPromise = resetPasswordService.execute({
+      token: 'non-existing-token',
+      password: '123123',
+    })
+
+    await expect(resetPasswordPromise).rejects.toBeInstanceOf(AppError)
+  })
 })
+
+/**
+ * - Hash
+ * - 2h expiração
+ * - user inexistente
+ */
