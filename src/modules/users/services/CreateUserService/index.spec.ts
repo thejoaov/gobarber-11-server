@@ -31,6 +31,7 @@ describe('CreateUser', () => {
       email: 'johndoe@example.com',
       password: '123123',
     })
+
     const createUserPromise = createUser.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
