@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
+import fancyLogger from '@poppinss/fancy-logs'
 import cors from 'cors'
 import 'express-async-errors'
 import dotenv from 'dotenv'
@@ -15,7 +16,7 @@ dotenv.config({ path: '../../../../' })
 
 const app = express()
 
-const { PORT, APP_URL } = process.env
+const { PORT, APP_URL, NODE_ENV } = process.env
 
 app.use(cors())
 app.use(express.json())
@@ -29,7 +30,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       .json({ status: 'error', message: err.message })
   }
 
-  console.error(err)
+  fancyLogger.fatal(err)
 
   return response
     .status(500)
@@ -37,6 +38,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server started on port ${PORT}`)
-  console.log(`🟢 Online on ${APP_URL}`)
+  fancyLogger.info(
+    `🚀 Server started in ${NODE_ENV?.toUpperCase()} mode on port ${PORT}`,
+  )
+  fancyLogger.success(`🟢 Online on ${APP_URL}`)
 })
