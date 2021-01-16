@@ -1,4 +1,4 @@
-import 'dotenv/config'
+require('dotenv').config()
 
 const {
   DB_HOST,
@@ -14,6 +14,7 @@ const {
 } = process.env
 
 console.log(`Running typeorm on ${NODE_ENV.toUpperCase()}`)
+
 const getConfigFolder = () => (NODE_ENV === 'production' ? 'dist' : 'src')
 
 const dbConfig = {
