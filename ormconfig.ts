@@ -1,4 +1,4 @@
-require('dotenv').config()
+import { ConnectionOptions } from 'typeorm'
 
 const {
   DB_HOST,
@@ -13,11 +13,7 @@ const {
   NODE_ENV,
 } = process.env
 
-console.log(`Running typeorm on ${NODE_ENV.toUpperCase()}`)
-
-const getConfigFolder = () => (NODE_ENV === 'production' ? 'dist' : 'src')
-
-const dbConfig = {
+const dbConfig: ConnectionOptions = {
   name: 'default',
   type: 'postgres',
   host: DB_HOST || 'localhost',
@@ -27,19 +23,15 @@ const dbConfig = {
   database: DB_NAME || 'gostack11_gobarber',
   migrationsRun: true,
   synchronize: false,
-  entities: [
-    `./${getConfigFolder()}/modules/**/infra/typeorm/entities/*{.ts,.js}`,
-  ],
-  migrations: [
-    `./${getConfigFolder()}/shared/infra/typeorm/migrations/*{.ts,.js}`,
-  ],
+  entities: ['./src/modules/**/infra/typeorm/entities/*{.ts,.js}'],
+  migrations: ['./src/shared/infra/typeorm/migrations/*{.ts,.js}'],
   cli: {
-    entitiesDir: `./${getConfigFolder()}/modules/**/infra/typeorm/entities`,
-    migrationsDir: `./${getConfigFolder()}/shared/infra/typeorm/migrations`,
+    entitiesDir: './src/modules/**/infra/typeorm/entities',
+    migrationsDir: './src/shared/infra/typeorm/migrations',
   },
 }
 
-const mongoConfig =
+const mongoConfig: ConnectionOptions =
   MONGO_URL && NODE_ENV === 'production'
     ? {
         name: 'mongo',
@@ -49,7 +41,7 @@ const mongoConfig =
         useUnifiedTopology: true,
         synchronize: true,
         logging: false,
-        entities: ['./dist/modules/**/infra/typeorm/schemas/*.ts'],
+        entities: ['./src/modules/**/infra/typeorm/schemas/*.ts'],
       }
     : {
         name: 'mongo',
@@ -62,4 +54,4 @@ const mongoConfig =
         entities: ['./src/modules/**/infra/typeorm/schemas/*.ts'],
       }
 
-module.exports = [dbConfig, mongoConfig]
+export default [dbConfig, mongoConfig]

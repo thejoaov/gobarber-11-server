@@ -6,7 +6,6 @@
     "rootDir": ".",
     "strict": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": false,
     "baseUrl": "./src",
     "paths": {
       "@modules/*": ["modules/*"],
