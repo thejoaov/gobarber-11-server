@@ -11,14 +11,15 @@ import routes from './routes'
 import '@shared/infra/typeorm'
 import '@shared/container'
 
-dotenv.config()
+dotenv.config({ path: '../../../../' })
+
 const app = express()
 
-const { PORT } = process.env
+const { PORT, APP_URL } = process.env
 
 app.use(cors())
 app.use(express.json())
-app.use('/files', express.static(uploadConfig.directory))
+app.use('/files', express.static(uploadConfig.uploadsFolder))
 app.use(routes)
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
@@ -37,4 +38,5 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Server started on port ${PORT}`)
+  console.log(`🟢 Online on ${APP_URL}`)
 })
