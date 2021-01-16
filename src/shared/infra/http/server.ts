@@ -1,9 +1,9 @@
 import 'reflect-metadata'
+import 'dotenv/config'
 import express, { Request, Response, NextFunction } from 'express'
 import { errors } from 'celebrate'
 import fancyLogger from '@poppinss/fancy-logs'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import 'express-async-errors'
 
 import uploadConfig from '@config/upload'
@@ -12,8 +12,6 @@ import routes from './routes'
 
 import '@shared/infra/typeorm'
 import '@shared/container'
-
-dotenv.config({ path: '../../../../' })
 
 const { PORT, APP_URL, NODE_ENV } = process.env
 
