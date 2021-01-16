@@ -23,11 +23,8 @@ jobs:
 workflows:
   testing:
     jobs:
-      - test
-general:
-  branches:
-    only:
-    - main # list of branches to build
-    ignore:
-      - /nivel-\/.*/ # or ignore regexes
-      
+      - test:
+          filters:
+            branches:
+              only: main
+              ignore: /nivel-\/.*/
