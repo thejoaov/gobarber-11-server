@@ -1,9 +1,10 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
+import { errors } from 'celebrate'
 import fancyLogger from '@poppinss/fancy-logs'
 import cors from 'cors'
-import 'express-async-errors'
 import dotenv from 'dotenv'
+import 'express-async-errors'
 
 import uploadConfig from '@config/upload'
 import AppError from '@shared/errors/AppError'
@@ -14,14 +15,16 @@ import '@shared/container'
 
 dotenv.config({ path: '../../../../' })
 
-const app = express()
-
 const { PORT, APP_URL, NODE_ENV } = process.env
+
+const app = express()
 
 app.use(cors())
 app.use(express.json())
 app.use('/files', express.static(uploadConfig.uploadsFolder))
 app.use(routes)
+
+app.use(errors())
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
@@ -30,7 +33,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       .json({ status: 'error', message: err.message })
   }
 
-  fancyLogger.fatal(err)
+  fancyLogger.error(err)
 
   return response
     .status(500)
