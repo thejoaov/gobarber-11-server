@@ -39,8 +39,6 @@ const mongoConfig: ConnectionOptions =
         url: MONGO_URL,
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        synchronize: true,
-        logging: false,
         entities: ['./src/modules/**/infra/typeorm/schemas/*.ts'],
       }
     : {
@@ -54,4 +52,6 @@ const mongoConfig: ConnectionOptions =
         entities: ['./src/modules/**/infra/typeorm/schemas/*.ts'],
       }
 
-export default [dbConfig, mongoConfig]
+const ORMConfig = [dbConfig, mongoConfig]
+
+export = ORMConfig
