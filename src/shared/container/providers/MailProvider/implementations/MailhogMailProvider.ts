@@ -1,6 +1,5 @@
 import { injectable, inject } from 'tsyringe'
 import nodemailer, { Transporter } from 'nodemailer'
-import fancyLogger from '@poppinss/fancy-logs'
 
 import ISendMailDTO from '../dtos/ISendMailDTO'
 import IMailProvider from '../models/IMailProvider'
@@ -42,6 +41,6 @@ export default class MailhogMailProvider implements IMailProvider {
       html: await this.mailTemplateProvider.parse(templateData),
     })
 
-    fancyLogger.success(`Message sent: ${message.messageId}`)
+    console.log(`Message sent: ${message.messageId}`)
   }
 }

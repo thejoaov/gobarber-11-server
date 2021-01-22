@@ -2,7 +2,6 @@ import 'reflect-metadata'
 import 'dotenv/config'
 import express, { Request, Response, NextFunction } from 'express'
 import { errors } from 'celebrate'
-import fancyLogger from '@poppinss/fancy-logs'
 import cors from 'cors'
 import 'express-async-errors'
 
@@ -24,23 +23,30 @@ app.use(routes)
 
 app.use(errors())
 
-app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
+app.use(
+  (
+    err: Error & { query?: string },
+    request: Request,
+    response: Response,
+    _: NextFunction,
+  ) => {
+    if (err instanceof AppError) {
+      return response
+        .status(err.statusCode)
+        .json({ status: 'error', message: err.message })
+    }
+
+    console.error(err)
+
     return response
-      .status(err.statusCode)
-      .json({ status: 'error', message: err.message })
-  }
-
-  fancyLogger.error(err)
-
-  return response
-    .status(500)
-    .json({ status: 'error', message: 'Internal server error' })
-})
+      .status(500)
+      .json({ status: 'error', message: 'Internal server error' })
+  },
+)
 
 app.listen(PORT, () => {
-  fancyLogger.info(
+  console.log(
     `🚀 Server started in ${NODE_ENV?.toUpperCase()} mode on port ${PORT}`,
   )
-  fancyLogger.success(`🟢 Online on ${APP_URL}`)
+  console.log(`🟢 Online on ${APP_URL}`)
 })

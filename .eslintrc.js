@@ -30,6 +30,8 @@ module.exports = {
     ],
     'no-useless-constructor': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
+    'no-console': 'off',
+    '@typescript-eslint/no-console': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
       {

@@ -1,6 +1,5 @@
 import { injectable, inject } from 'tsyringe'
 import nodemailer, { Transporter } from 'nodemailer'
-import fancyLogger from '@poppinss/fancy-logs'
 
 import ISendMailDTO from '../dtos/ISendMailDTO'
 import IMailProvider from '../models/IMailProvider'
@@ -48,7 +47,7 @@ export default class EtherealMailProvider implements IMailProvider {
       html: await this.mailTemplateProvider.parse(templateData),
     })
 
-    fancyLogger.success(`Message sent: ${message.messageId}`)
-    fancyLogger.info(`Preview URL: ${nodemailer.getTestMessageUrl(message)}`)
+    console.log(`Message sent: ${message.messageId}`)
+    console.log(`Preview URL: ${nodemailer.getTestMessageUrl(message)}`)
   }
 }
