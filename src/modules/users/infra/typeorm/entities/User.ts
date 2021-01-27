@@ -40,7 +40,7 @@ class User {
     }
 
     const storageDriver = {
-      disk: `${process.env.APP_URL}/files/${this.avatar}`,
+      disk: `${process.env.API_URL}/files/${this.avatar}`,
       s3: `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.avatar}`,
     }
 
