@@ -13,7 +13,7 @@ import routes from './routes'
 import '@shared/infra/typeorm'
 import '@shared/container'
 
-const { PORT, APP_URL, NODE_ENV } = process.env
+const { PORT, API_URL, NODE_ENV } = process.env
 
 const app = express()
 
@@ -50,5 +50,5 @@ app.listen(PORT, () => {
   console.log(
     `🚀 Server started in ${NODE_ENV?.toUpperCase()} mode on port ${PORT}`,
   )
-  console.log(`🟢 Online on ${APP_URL}`)
+  console.log(`🟢 Online on ${API_URL}`)
 })
