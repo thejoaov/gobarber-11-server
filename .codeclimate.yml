@@ -36,3 +36,23 @@ checks:
       threshold: 4
   similar-code:
     enabled: false
+exclude_patterns:
+- "config/"
+- "db/"
+- "dist/"
+- "features/"
+- "**/node_modules/"
+- "script/"
+- "**/spec/"
+- "**/test/"
+- "**/tests/"
+- "Tests/"
+- "**/vendor/"
+- "**/*_test.go"
+- "**/*.d.ts"
+- "tmp/"
+- ".eslintrc.js"
+- "jest.config.js"
+- "**/*.svg"
+- "prettier.config.js"
+- "ormconfig.ts"
