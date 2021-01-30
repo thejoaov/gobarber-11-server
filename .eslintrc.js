@@ -21,6 +21,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
+    'class-methods-use-this': 'off',
+    camelcase: 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
       {

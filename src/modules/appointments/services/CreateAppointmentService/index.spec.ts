@@ -24,9 +24,9 @@ describe('CreateAppointment', () => {
   })
 
   it('should be able to create a new appointment', async () => {
-    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
-      return new Date(2021, 4, 10, 12).getTime()
-    })
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() => new Date(2021, 4, 10, 12).getTime())
 
     const appointment = await createAppointment.execute({
       date: new Date(2021, 4, 10, 13),
@@ -57,9 +57,9 @@ describe('CreateAppointment', () => {
   })
 
   it('should not be able to create an appointment on a past date', async () => {
-    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
-      return new Date(2021, 4, 10, 12).getTime()
-    })
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() => new Date(2021, 4, 10, 12).getTime())
 
     await expect(
       createAppointment.execute({
@@ -71,9 +71,9 @@ describe('CreateAppointment', () => {
   })
 
   it('should not be able to create an appointment with same user as provider', async () => {
-    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
-      return new Date(2021, 4, 10, 12).getTime()
-    })
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() => new Date(2021, 4, 10, 12).getTime())
 
     await expect(
       createAppointment.execute({
@@ -85,9 +85,9 @@ describe('CreateAppointment', () => {
   })
 
   it('should not be able to create an appointment before 8am and after 5pm', async () => {
-    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
-      return new Date(2021, 4, 10, 12).getTime()
-    })
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() => new Date(2021, 4, 10, 12).getTime())
 
     await expect(
       createAppointment.execute({
