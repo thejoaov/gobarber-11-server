@@ -2,7 +2,7 @@ version: "2"         # required to adjust maintainability checks
 plugins:
   eslint:
     enabled: true
-    channel: "eslint-5"
+    channel: "eslint-6"
     config:
       config: .eslintrc.js
       ignore_warnings: true
@@ -10,7 +10,7 @@ plugins:
       - .ts
       - .js
     checks:
-      typescript-eslint/naming-convention:
+      "@typescript-eslint/naming-convention":
         enabled: false
 checks:
   argument-count:
