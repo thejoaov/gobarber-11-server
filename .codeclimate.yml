@@ -10,7 +10,7 @@ plugins:
       - .ts
       - .js
     checks:
-      typescript-eslint/naming-convention:
+      "@typescript-eslint/naming-convention":
         enabled: false
 checks:
   argument-count:
