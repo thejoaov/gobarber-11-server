@@ -17,9 +17,9 @@ const { PORT, API_URL, NODE_ENV } = process.env
 
 const app = express()
 
-app.use(rateLimiter)
 app.use(cors())
 app.use(express.json())
+app.use(rateLimiter)
 app.use('/files', express.static(uploadConfig.uploadsFolder))
 app.use(routes)
 
