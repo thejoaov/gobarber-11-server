@@ -11,7 +11,7 @@
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "ts-node --transpile-only -r tsconfig-paths/register src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "lint": "eslint src -c .eslintrc.js --ext \"js,ts,tsx\" --cache",
+    "lint": "eslint src -c .eslintrc.js --ext \"js,ts\" --cache",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
     "test": "jest --runInBand",
     "test:changed": "jest -o --passWithNoTests",
