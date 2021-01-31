@@ -22,13 +22,5 @@ module.exports = {
       path: '/home/thejoaov/www',
       'pre-deploy': 'yarn && yarn build',
     },
-    dev: {
-      user: 'thejoaov',
-      host: ['localhost'],
-      ref: `${exec('git branch --show-current')}`,
-      repo: 'git@github.com:thejoaov/gobarber-14-server.git',
-      path: '/home/thejoaov/www',
-      'pre-deploy': 'yarn && yarn build',
-    },
   },
 }
