@@ -3,6 +3,7 @@
 
 <h2 style="color:#777">Backend Server</h2>
 
+[![Uptime Robot status][uptime-robot-badge]][healthcheck-url]
 [![CircleCI][circleci-img]][circleci-url]
 [![codecov][codecov-badge]][codecov-badge-url]
 [![Maintainability][codeclimate-img]][codeclimate-url]
@@ -33,3 +34,5 @@ So, the code avaiable here may differ from the original, which can be found [HER
 [requisites-url]: ./requisites.md
 [codeclimate-img]: https://api.codeclimate.com/v1/badges/f258560d8d96218bfc14/maintainability
 [codeclimate-url]: https://codeclimate.com/github/thejoaov/gobarber-14-server/maintainability
+[uptime-robot-badge]: https://img.shields.io/uptimerobot/status/m787091167-ab74b50729ce6ea91b481ac6
+[healthcheck-url]: https://vvl7900d.status.cron-job.org
