@@ -1,4 +1,5 @@
 require('dotenv/config')
+const { exec } = require('child_process')
 
 module.exports = {
   apps: [
@@ -24,7 +25,7 @@ module.exports = {
     dev: {
       user: 'thejoaov',
       host: ['localhost'],
-      ref: '$GIT_BRANCH',
+      ref: `${exec('git branch --show-current')}`,
       repo: 'git@github.com:thejoaov/gobarber-14-server.git',
       path: '/home/thejoaov/www',
       'pre-deploy': 'yarn && yarn build',
