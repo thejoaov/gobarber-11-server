@@ -10,15 +10,27 @@ jobs:
           name: 'Setup Environment Variables'
           command: |
             echo 'export CODECOV_TOKEN="$CODECOV_TOKEN"' >> $BASH_ENV
+      - restore_cache:
+          key: 'node-v1-{{ checksum "package.json" }}'
+      - restore_cache:
+          key: 'yarn-v1-{{ checksum "yarn.lock" }}'
       - run:
           name: 'Install dependencies'
-          command: 'yarn install'
+          command: 'yarn'
       - run:
           name: 'Test'
           command: 'yarn test:ci'
       - run:
           name: 'Send report to codecov'
           command: 'bash <(curl -s https://codecov.io/bash)'
+      - save_cache:
+          key: 'node-v1-{{ checksum "package.json" }}'
+          paths:
+            - node_modules
+      - save_cache:
+          key: 'yarn-v1-{{ checksum "yarn.lock" }}'
+          paths:
+            - ~/.cache/yarn
 
 workflows:
   testing:
