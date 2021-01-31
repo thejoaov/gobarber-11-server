@@ -12,6 +12,7 @@ import routes from './routes'
 
 import '@shared/infra/typeorm'
 import '@shared/container'
+import { errorLogger, requestLogger } from './middleware/logger'
 
 const { PORT, API_URL, NODE_ENV } = process.env
 
@@ -24,6 +25,8 @@ app.use(rateLimiter)
 app.use(routes)
 
 app.use(errors())
+
+app.use(requestLogger)
 
 app.use(
   (
@@ -38,13 +41,13 @@ app.use(
         .json({ status: 'error', message: err.message })
     }
 
-    console.error(err)
-
     return response
       .status(500)
       .json({ status: 'error', message: 'Internal server error' })
   },
 )
+
+app.use(errorLogger)
 
 app.listen(PORT, () => {
   console.log(
