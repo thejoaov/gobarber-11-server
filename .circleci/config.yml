@@ -17,6 +17,12 @@ jobs:
       - run:
           name: 'Install dependencies'
           command: 'yarn'
+      - run:
+          name: 'Test'
+          command: 'yarn test:ci'
+      - run:
+          name: 'Send report to codecov'
+          command: 'bash <(curl -s https://codecov.io/bash)'
       - save_cache:
           key: 'node-v1-{{ checksum "package.json" }}'
           paths:
@@ -25,12 +31,6 @@ jobs:
           key: 'yarn-v1-{{ checksum "yarn.lock" }}'
           paths:
             - ~/.cache/yarn
-      - run:
-          name: 'Test'
-          command: 'yarn test:ci'
-      - run:
-          name: 'Send report to codecov'
-          command: 'bash <(curl -s https://codecov.io/bash)'
 
 workflows:
   testing:
