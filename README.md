@@ -20,6 +20,7 @@ So, the code avaiable here may differ from the original, which can be found [HER
 
 - [x] Commit pattern (git-commit-msg-linter)
 - [x] Husky and lint-staged
+- [ ] Sending emails in production
 - [x] Dockerize Databases (docker-compose)
 - [x] Tests implementation (TDD)
 - [x] CI (CircleCI)
