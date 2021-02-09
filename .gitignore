@@ -6,4 +6,3 @@ tmp/*
 .env
 coverage
 .eslintcache
-**/.DS_Store
