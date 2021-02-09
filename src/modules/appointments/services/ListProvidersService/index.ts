@@ -22,7 +22,7 @@ class ListProvidersService {
     /* let users = await this.cacheProvider.recover<User[]>(
       `providers-list:${user_id}`,
     ) */
-    let users = []
+    let users = [] as Record<string, unknown>[]
     
     if (!users) {
       users = await this.usersRepository.findAllProviders({
