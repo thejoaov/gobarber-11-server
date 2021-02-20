@@ -20,13 +20,13 @@ So, the code avaiable here may differ from the original, which can be found [HER
 
 - [x] Commit pattern (git-commit-msg-linter)
 - [x] Husky and lint-staged
-- [ ] Sending emails in production
+- [ ] Sending emails in production (currently using only mailhog | ethereal for development)
 - [x] Dockerize Databases (docker-compose)
 - [x] Tests implementation (TDD)
 - [x] Sentry
 - [x] CI (CircleCI)
 - [x] CD (Heroku)
-- [x] Code Coverage (CodeCov)
+- [x] Code Quality and Coverage (Codeclimate)
 
 [gobarber-rocketseat]: https://github.com/rocketseat-education/bootcamp-gostack-modulos
 [circleci-img]: https://circleci.com/gh/thejoaov/gobarber-14-server/tree/main.svg?style=svg
