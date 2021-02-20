@@ -1,7 +1,6 @@
-import 'dotenv/config'
-import { ConnectionOptions, DbOptions } from 'typeorm'
+require('dotenv').config()
 
-const devConfig: Array<ConnectionOptions | DbOptions> = [
+const devConfig = [
   {
     name: 'default',
     migrationsRun: true,
@@ -29,7 +28,7 @@ const devConfig: Array<ConnectionOptions | DbOptions> = [
   },
 ]
 
-const prodConfig: Array<ConnectionOptions | DbOptions> = [
+const prodConfig = [
   {
     name: 'default',
     type: 'postgres',
@@ -52,8 +51,8 @@ const prodConfig: Array<ConnectionOptions | DbOptions> = [
     url: process.env.MONGO_URL,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    entities: ['./dist/src/modules/**/infra/typeorm/schemas/*.js'],
+    entities: ['./dist/modules/**/infra/typeorm/schemas/*.js'],
   },
 ]
 
-export = process.env.NODE_ENV === 'development' ? devConfig : prodConfig
+module.exports = process.env.NODE_ENV === 'development' ? devConfig : prodConfig
