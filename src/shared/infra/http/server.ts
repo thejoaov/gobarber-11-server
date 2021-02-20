@@ -6,6 +6,7 @@ import cors from 'cors'
 import 'express-async-errors'
 
 import uploadConfig from '@config/upload'
+import SentryError from '@shared/errors/Sentry'
 import AppError from '@shared/errors/AppError'
 import rateLimiter from './middleware/rateLimiter'
 import routes from './routes'
@@ -17,6 +18,8 @@ import { errorLogger, requestLogger } from './middleware/logger'
 const { PORT, API_URL, NODE_ENV } = process.env
 
 const app = express()
+const sentry = new SentryError()
+sentry.init()
 
 app.use(cors())
 app.use(express.json())
@@ -33,7 +36,7 @@ app.use(
     err: Error & { query?: string },
     request: Request,
     response: Response,
-    _: NextFunction,
+    next: NextFunction,
   ) => {
     if (err instanceof AppError) {
       return response
@@ -41,13 +44,13 @@ app.use(
         .json({ status: 'error', message: err.message })
     }
 
+    sentry.captureError(err)
+    errorLogger(err, request, response, next)
     return response
       .status(500)
       .json({ status: 'error', message: 'Internal server error' })
   },
 )
-
-app.use(errorLogger)
 
 app.listen(PORT, () => {
   console.log(

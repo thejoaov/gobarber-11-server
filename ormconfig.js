@@ -1,8 +1,9 @@
-require('dotenv/config')
+require('dotenv').config()
 
 const devConfig = [
   {
     name: 'default',
+    migrationsRun: true,
     type: 'postgres',
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT || 5432),
@@ -33,13 +34,14 @@ const prodConfig = [
     type: 'postgres',
     host: process.env.DB_HOST,
     port: 5432,
+    migrationsRun: true,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
     migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
     cli: {
-      entities: './dist/modules/**/infra/typeorm/entities',
+      entitiesDir: './dist/modules/**/infra/typeorm/entities',
       migrationsDir: './dist/shared/infra/typeorm/migrations',
     },
   },
@@ -49,7 +51,7 @@ const prodConfig = [
     url: process.env.MONGO_URL,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    entities: ['./dist/src/modules/**/infra/typeorm/schemas/*.js'],
+    entities: ['./dist/modules/**/infra/typeorm/schemas/*.js'],
   },
 ]
 
