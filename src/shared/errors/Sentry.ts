@@ -5,9 +5,7 @@ import '@sentry/tracing'
 export default class SentryError {
   public init = (): void => {
     return Sentry.init({
-      dsn:
-        'https://a51bdc4c4a254cc49329a2a4309d5907@o293659.ingest.sentry.io/5645704',
-
+      dsn: process.env.SENTRY_DSN,
       // We recommend adjusting this value in production, or using tracesSampler
       // for finer control
       tracesSampleRate: 1.0,
