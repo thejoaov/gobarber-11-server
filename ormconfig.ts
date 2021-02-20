@@ -1,8 +1,10 @@
-require('dotenv/config')
+import 'dotenv/config'
+import { ConnectionOptions, DbOptions } from 'typeorm'
 
-const devConfig = [
+const devConfig: Array<ConnectionOptions | DbOptions> = [
   {
     name: 'default',
+    migrationsRun: true,
     type: 'postgres',
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT || 5432),
@@ -27,19 +29,20 @@ const devConfig = [
   },
 ]
 
-const prodConfig = [
+const prodConfig: Array<ConnectionOptions | DbOptions> = [
   {
     name: 'default',
     type: 'postgres',
     host: process.env.DB_HOST,
     port: 5432,
+    migrationsRun: true,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
     migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
     cli: {
-      entities: './dist/modules/**/infra/typeorm/entities',
+      entitiesDir: './dist/modules/**/infra/typeorm/entities',
       migrationsDir: './dist/shared/infra/typeorm/migrations',
     },
   },
@@ -53,4 +56,4 @@ const prodConfig = [
   },
 ]
 
-module.exports = process.env.NODE_ENV === 'development' ? devConfig : prodConfig
+export = process.env.NODE_ENV === 'development' ? devConfig : prodConfig
