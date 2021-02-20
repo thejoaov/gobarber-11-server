@@ -18,6 +18,8 @@
     "test:ci": "TZ=America/Fortaleza jest --ci --runInBand --collectCoverage"
   },
   "dependencies": {
+    "@sentry/node": "^6.2.0",
+    "@sentry/tracing": "^6.2.0",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
     "@types/mongodb": "^3.6.3",
