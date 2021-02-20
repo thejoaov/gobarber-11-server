@@ -23,6 +23,7 @@ So, the code avaiable here may differ from the original, which can be found [HER
 - [ ] Sending emails in production
 - [x] Dockerize Databases (docker-compose)
 - [x] Tests implementation (TDD)
+- [x] Sentry
 - [x] CI (CircleCI)
 - [x] CD (Heroku)
 - [x] Code Coverage (CodeCov)
