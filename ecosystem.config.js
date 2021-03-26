@@ -7,7 +7,7 @@ module.exports = {
       exec_mode: 'cluster',
       instances: process.env.INSTANCES || 'max',
       env: {
-        NODE_ENV: 'production',
+        NODE_ENV: process.env.NODE_ENV,
       },
     },
   ],
