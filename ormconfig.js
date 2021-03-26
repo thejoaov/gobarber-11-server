@@ -29,22 +29,40 @@ const devConfig = [
 ]
 
 const prodConfig = [
-  {
-    name: 'default',
-    type: 'postgres',
-    host: process.env.DB_HOST,
-    port: 5432,
-    migrationsRun: true,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
-    migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
-    cli: {
-      entitiesDir: './dist/modules/**/infra/typeorm/entities',
-      migrationsDir: './dist/shared/infra/typeorm/migrations',
-    },
-  },
+  !!process.env.DB_SSL
+    ? {
+        name: 'default',
+        type: 'postgres',
+        host: process.env.DB_HOST,
+        port: 5432,
+        migrationsRun: true,
+        ssl: true,
+        username: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
+        entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
+        migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
+        cli: {
+          entitiesDir: './dist/modules/**/infra/typeorm/entities',
+          migrationsDir: './dist/shared/infra/typeorm/migrations',
+        },
+      }
+    : {
+        name: 'default',
+        type: 'postgres',
+        host: process.env.DB_HOST,
+        port: 5432,
+        migrationsRun: true,
+        username: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
+        entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
+        migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
+        cli: {
+          entitiesDir: './dist/modules/**/infra/typeorm/entities',
+          migrationsDir: './dist/shared/infra/typeorm/migrations',
+        },
+      },
   {
     name: 'mongo',
     type: 'mongodb',
