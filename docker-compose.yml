@@ -3,7 +3,8 @@ version: "3"
 services:
   postgres:
     container_name: gobarber-postgres
-    image: postgres:alpine
+    image: postgres:11.5-alpine
+    command: -c ssl=false
     ports:
       - "5432:5432"
     environment:
