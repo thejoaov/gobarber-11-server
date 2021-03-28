@@ -1,5 +1,5 @@
 {
-  "name": "gobarber-14-server",
+  "name": "2-iniciando-backend-do-app",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -8,9 +8,9 @@
   },
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --project tsconfig.json --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "start": "pm2-runtime start ecosystem.config.js",
-    "typeorm": "ts-node -r tsconfig-paths/register --transpile-only --project tsconfig.json ./node_modules/typeorm/cli.js",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "lint": "eslint src -c .eslintrc.js --ext \".js,.ts\" --cache",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
     "test": "jest --runInBand",
@@ -86,6 +86,6 @@
     "prettier": "^2.2.1",
     "ts-jest": "^26.4.4",
     "ts-node-dev": "^1.1.1",
-    "typescript": "^4.2.3"
+    "typescript": "^3.8.3"
   }
 }
