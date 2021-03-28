@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --project tsconfig.json --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "start": "pm2-runtime start ecosystem.config.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "staging": "pm2-runtime start ecosystem.config.js",
     "typeorm": "ts-node -r tsconfig-paths/register --transpile-only --project tsconfig.json ./node_modules/typeorm/cli.js",
     "lint": "eslint src -c .eslintrc.js --ext \".js,.ts\" --cache",
     "prettify": "prettier --check 'src/**/*.{ts,js,json}' --write",
