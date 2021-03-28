@@ -34,7 +34,7 @@ const production = [
     type: 'postgres',
     url: process.env.DATABASE_URL,
     migrationsRun: true,
-    ssl: true,
+    ssl: { rejectUnauthorized: false },
     entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
     migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
     cli: {
