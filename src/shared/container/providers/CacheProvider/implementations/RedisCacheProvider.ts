@@ -13,7 +13,7 @@ export default class RedisCacheProvider implements ICacheProvider {
   constructor() {
     this.client =
       process.env.NODE_ENV === 'production' && !!process.env.REDIS_URL
-        ? new Redis(process.env.REDIS_URL)
+        ? new Redis(`${process.env.REDIS_URL}`)
         : new Redis(cacheConfig.config.redis)
   }
 

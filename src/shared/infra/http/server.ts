@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import express, { Request, Response, NextFunction } from 'express'
 import { errors } from 'celebrate'
 import cors from 'cors'
@@ -19,7 +19,9 @@ const { PORT, API_URL, NODE_ENV } = process.env
 
 const app = express()
 const sentry = new SentryError()
+
 sentry.init()
+dotenv.config({ debug: true })
 
 app.use(cors())
 app.use(express.json())
