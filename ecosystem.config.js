@@ -10,6 +10,9 @@ module.exports = {
       env: {
         NODE_ENV: process.env.NODE_ENV,
       },
+      env_production: {
+        NODE_ENV: 'production',
+      },
     },
   ],
   deploy: {
