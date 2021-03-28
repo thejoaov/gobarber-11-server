@@ -1,14 +1,20 @@
 import Redis, { Redis as RedisClient } from 'ioredis'
 
+import dotenv from 'dotenv'
+
 import cacheConfig from '@config/cache'
 
 import ICacheProvider from '../models/ICacheProvider'
 
+dotenv.config()
 export default class RedisCacheProvider implements ICacheProvider {
   private client: RedisClient
 
   constructor() {
-    this.client = new Redis(cacheConfig.config.redis)
+    this.client =
+      process.env.NODE_ENV === 'production'
+        ? new Redis(process.env.REDIS_URL)
+        : new Redis(cacheConfig.config.redis)
   }
 
   public async save(key: string, value: any): Promise<void> {
