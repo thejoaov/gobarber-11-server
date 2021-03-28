@@ -14,7 +14,9 @@ export default class RedisCacheProvider implements ICacheProvider {
     console.log(process.env.REDIS_URL, process.env.REDIS_TLS_URL)
     this.client =
       process.env.NODE_ENV === 'production' && !!process.env.REDIS_URL
-        ? new Redis(`${process.env.REDIS_URL}`, { enableOfflineQueue: true })
+        ? new Redis(decodeURI(`${process.env.REDIS_URL}`), {
+            enableOfflineQueue: true,
+          })
         : new Redis(cacheConfig.config.redis)
   }
 
