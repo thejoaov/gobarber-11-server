@@ -17,6 +17,10 @@ export default {
       port: process.env.REDIS_PORT,
       password: process.env.REDIS_PASS || undefined,
       username: process.env.REDIS_USER || undefined,
+      reconnectOnError: (error): boolean => {
+        console.log('Always reconnect on error', error)
+        return true
+      },
     },
   },
 } as ICacheConfig
