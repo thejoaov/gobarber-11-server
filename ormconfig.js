@@ -32,6 +32,7 @@ const production = [
   {
     name: 'default',
     type: 'postgres',
+    url: process.env.DATABASE_URL,
     host: process.env.DB_HOST,
     port: 5432,
     migrationsRun: true,
