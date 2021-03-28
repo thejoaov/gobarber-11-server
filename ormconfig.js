@@ -33,13 +33,8 @@ const production = [
     name: 'default',
     type: 'postgres',
     url: process.env.DATABASE_URL,
-    host: process.env.DB_HOST,
-    port: 5432,
     migrationsRun: true,
-    username: process.env.DB_USER,
     ssl: true,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
     entities: ['./dist/modules/**/infra/typeorm/entities/*.js'],
     migrations: ['./dist/shared/infra/typeorm/migrations/*.js'],
     cli: {
