@@ -1,5 +1,4 @@
-require('dotenv/config')
-const { exec } = require('child_process')
+require('dotenv').config()
 
 module.exports = {
   apps: [
